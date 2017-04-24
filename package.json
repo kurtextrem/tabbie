@@ -11,6 +11,7 @@
     "babel-preset-stage-0": "^6.22.0",
     "babelify": "^7.3.0",
     "browserify": "^13.0.0",
+    "cross-env": "^4.0.0",
     "eslint": "^3.13.0",
     "eslint-config-airbnb": "^13.0.0",
     "eslint-plugin-import": "^2.2.0",
@@ -29,7 +30,7 @@
     "watchify": "^3.7.0"
   },
   "scripts": {
-    "build": "NODE_ENV=production browserify ./src/index.jsx --extension=jsx -t babelify | uglifyjs -c > bundle.js",
+    "build": "cross-env NODE_ENV=production browserify ./src/index.jsx --extension=jsx -t babelify | uglifyjs -c > bundle.js",
     "start": "watchify ./src/index.jsx --extension=jsx -v -t babelify -o bundle.js",
     "zip": "npm run build && node zip"
   }
