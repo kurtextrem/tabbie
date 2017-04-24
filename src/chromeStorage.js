@@ -1,5 +1,5 @@
 export const setState = state => new Promise((resolve, reject) => {
-  chrome.storage.sync.set(state, () => {
+  chrome.storage.local.set(state, () => {
     if (chrome.runtime.error) {
       reject(chrome.runtime.error);
     } else {
@@ -9,7 +9,7 @@ export const setState = state => new Promise((resolve, reject) => {
 });
 
 export const getState = () => new Promise((resolve, reject) => {
-  chrome.storage.sync.get(null, (state) => {
+  chrome.storage.local.get(null, (state) => {
     if (chrome.runtime.error) {
       reject(chrome.runtime.error);
     } else {
