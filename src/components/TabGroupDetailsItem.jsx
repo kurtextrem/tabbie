@@ -30,25 +30,22 @@ const pinnedStyle = {
 const renderUrl = url => {
 	const parsedUrl = parse(url)
 	const pathAndHash =
-		`${parsedUrl.pathname}${parsedUrl.hash}` !== '/'
-			? <div style={ellipsisStyle}>
-					<a href={parsedUrl} target="_blank" rel="noopener">
-						<small style={urlPathStyle}>
-							{parsedUrl.pathname}
-							{parsedUrl.hash}
-						</small>
-					</a>
-				</div>
+		parsedUrl.pathname + parsedUrl.query + parsedUrl.hash !== '/'
+			? <small>
+					{parsedUrl.pathname}
+					{parsedUrl.query}
+					{parsedUrl.hash}
+				</small>
 			: null
 	return (
-		<div>
-			<div style={ellipsisStyle}>
+		<div style={ellipsisStyle}>
+			<div>
 				{parsedUrl.protocol}
 				{'//'}
 				{parsedUrl.auth}
 				{parsedUrl.host}
 			</div>
-			<a href={parsedUrl} target="_blank" rel="noopener">
+			<a href={parsedUrl} target="_blank" rel="noopener" style={urlPathStyle}>
 				{pathAndHash}
 			</a>
 		</div>
@@ -57,7 +54,7 @@ const renderUrl = url => {
 
 const renderPinned = () =>
 	<div style={pinnedStyle}>
-		<Button type={'primary'}>pinned</Button>
+		<Button type={'primary'}>📌</Button>
 	</div>
 
 /* eslint-disable react/prop-types */
