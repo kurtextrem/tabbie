@@ -1,87 +1,91 @@
-import React, { PropTypes } from 'react';
-import parse from 'url-parse';
-import Button from './Button';
-import { listItemStyle } from '../styles/list';
-import { grey } from '../styles/colors';
+import React, { PropTypes } from 'react'
+import parse from 'url-parse'
+import Button from './Button'
+import { listItemStyle } from '../styles/list'
+import { grey } from '../styles/colors'
 
 const urlStyle = {
-  flexGrow: 1,
-  marginRight: '1rem',
-};
+	flexGrow: 1,
+	marginRight: '1rem',
+}
 
 const customListStyle = {
-  alignItems: 'center',
-};
+	alignItems: 'center',
+}
 
 const ellipsisStyle = {
-  whiteSpace: 'nowrap',
-  overflow: 'hidden',
-  textOverflow: 'ellipsis',
-};
+	whiteSpace: 'nowrap',
+	overflow: 'hidden',
+	textOverflow: 'ellipsis',
+}
 
 const urlPathStyle = {
-  color: grey,
-};
+	color: grey,
+}
 
 const pinnedStyle = {
-  marginRight: '1rem',
-};
+	marginRight: '1rem',
+}
 
-const renderUrl = (url) => {
-  const parsedUrl = parse(url);
-  const pathAndHash = `${parsedUrl.pathname}${parsedUrl.hash}` !== '/' ?
-    (<div style={ellipsisStyle}>
-      <small style={urlPathStyle}>{parsedUrl.pathname}{parsedUrl.hash}</small>
-    </div>) : null;
-  return (
-    <div>
-      <div style={ellipsisStyle}>{parsedUrl.protocol}{'//'}{parsedUrl.auth}{parsedUrl.host}</div>
-      {pathAndHash}
-    </div>
-  );
-};
+const renderUrl = url => {
+	const parsedUrl = parse(url)
+	const pathAndHash =
+		`${parsedUrl.pathname}${parsedUrl.hash}` !== '/'
+			? <div style={ellipsisStyle}>
+					<a href={parsedUrl} target="_blank" rel="noopener">
+						<small style={urlPathStyle}>
+							{parsedUrl.pathname}
+							{parsedUrl.hash}
+						</small>
+					</a>
+				</div>
+			: null
+	return (
+		<div>
+			<div style={ellipsisStyle}>
+				{parsedUrl.protocol}
+				{'//'}
+				{parsedUrl.auth}
+				{parsedUrl.host}
+			</div>
+			<a href={parsedUrl} target="_blank" rel="noopener">
+				{pathAndHash}
+			</a>
+		</div>
+	)
+}
 
 const renderPinned = () =>
-  <div style={pinnedStyle}>
-    <Button type={'primary'}>pinned</Button>
-  </div>;
+	<div style={pinnedStyle}>
+		<Button type={'primary'}>pinned</Button>
+	</div>
 
 /* eslint-disable react/prop-types */
 
 const renderRemove = ({ tabKey, tabGroupKey, onRemoveClick }) =>
-  <div>
-    <Button
-      type={'warning'}
-      hoverId={`tab-group-details-item/remove-${tabKey}`}
-      onClick={() => onRemoveClick({ tabKey, tabGroupKey })}
-    >
-      remove
-    </Button>
-  </div>;
+	<div>
+		<Button type={'warning'} hoverId={`tab-group-details-item/remove-${tabKey}`} onClick={() => onRemoveClick({ tabKey, tabGroupKey })}>
+			remove
+		</Button>
+	</div>
 
 /* eslint-enable react/prop-types */
 
-const TabGroupDetailsItem = ({
-  pinned,
-  url,
-  tabKey,
-  tabGroupKey,
-  onRemoveClick,
-}) =>
-  <li style={{ ...listItemStyle, ...customListStyle }}>
-    <div style={{ ...urlStyle, ...ellipsisStyle }}>
-      {renderUrl(url, pinned)}
-    </div>
-    {pinned ? renderPinned() : null}
-    {renderRemove({ tabKey, tabGroupKey, onRemoveClick })}
-  </li>;
+const TabGroupDetailsItem = ({ pinned, url, tabKey, tabGroupKey, onRemoveClick }) =>
+	<li style={{ ...listItemStyle, ...customListStyle }}>
+		<div style={{ ...urlStyle, ...ellipsisStyle }}>
+			{renderUrl(url, pinned)}
+		</div>
+		{pinned ? renderPinned() : null}
+		{renderRemove({ tabKey, tabGroupKey, onRemoveClick })}
+	</li>
 
 TabGroupDetailsItem.propTypes = {
-  tabKey: PropTypes.number,
-  tabGroupKey: PropTypes.number,
-  onRemoveClick: PropTypes.func,
-  pinned: PropTypes.bool,
-  url: PropTypes.string,
-};
+	tabKey: PropTypes.number,
+	tabGroupKey: PropTypes.number,
+	onRemoveClick: PropTypes.func,
+	pinned: PropTypes.bool,
+	url: PropTypes.string,
+}
 
-export default TabGroupDetailsItem;
+export default TabGroupDetailsItem
