@@ -1,9 +1,9 @@
 {
   "manifest_version": 2,
-  "name": "Tabbie",
+  "name": "Tabbie Updated",
   "short_name": "Tabbie",
-  "description": "The missing tab manager for Chrome",
-  "version": "0.4.1",
+  "description": "The missing tab manager for Chrome, updated for the latest Chrome version.",
+  "version": "0.4.2",
   "icons": {
     "128": "icon.png",
     "16": "icon.png",
