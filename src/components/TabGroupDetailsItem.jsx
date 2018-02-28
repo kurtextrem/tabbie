@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react'
+import React from 'react'
+import PropTypes from 'prop-types'
 import parse from 'url-parse'
 import Button from './Button'
 import { listItemStyle } from '../styles/list'
@@ -30,13 +31,13 @@ const pinnedStyle = {
 const renderUrl = url => {
 	const parsedUrl = parse(url)
 	const pathAndHash =
-		parsedUrl.pathname + parsedUrl.query + parsedUrl.hash !== '/'
-			? <small>
-					{parsedUrl.pathname}
-					{parsedUrl.query}
-					{parsedUrl.hash}
-				</small>
-			: null
+		parsedUrl.pathname + parsedUrl.query + parsedUrl.hash !== '/' ? (
+			<small>
+				{parsedUrl.pathname}
+				{parsedUrl.query}
+				{parsedUrl.hash}
+			</small>
+		) : null
 	return (
 		<div style={ellipsisStyle}>
 			<div>
@@ -52,30 +53,31 @@ const renderUrl = url => {
 	)
 }
 
-const renderPinned = () =>
+const renderPinned = () => (
 	<div style={pinnedStyle}>
 		<Button type={'primary'}>📌</Button>
 	</div>
+)
 
 /* eslint-disable react/prop-types */
 
-const renderRemove = ({ tabKey, tabGroupKey, onRemoveClick }) =>
+const renderRemove = ({ tabKey, tabGroupKey, onRemoveClick }) => (
 	<div>
 		<Button type={'warning'} hoverId={`tab-group-details-item/remove-${tabKey}`} onClick={() => onRemoveClick({ tabKey, tabGroupKey })}>
 			remove
 		</Button>
 	</div>
+)
 
 /* eslint-enable react/prop-types */
 
-const TabGroupDetailsItem = ({ pinned, url, tabKey, tabGroupKey, onRemoveClick }) =>
+const TabGroupDetailsItem = ({ pinned, url, tabKey, tabGroupKey, onRemoveClick }) => (
 	<li style={{ ...listItemStyle, ...customListStyle }}>
-		<div style={{ ...urlStyle, ...ellipsisStyle }}>
-			{renderUrl(url, pinned)}
-		</div>
+		<div style={{ ...urlStyle, ...ellipsisStyle }}>{renderUrl(url, pinned)}</div>
 		{pinned ? renderPinned() : null}
 		{renderRemove({ tabKey, tabGroupKey, onRemoveClick })}
 	</li>
+)
 
 TabGroupDetailsItem.propTypes = {
 	tabKey: PropTypes.number,
