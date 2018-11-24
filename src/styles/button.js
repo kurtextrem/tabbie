@@ -1,8 +1,4 @@
-import {
-  red,
-  blue,
-  white,
-} from './colors';
+import { blue, red, white } from './colors';
 
 export const buttonStyle = {
   background: white,
@@ -11,6 +7,8 @@ export const buttonStyle = {
   color: blue,
   fontSize: '0.9em',
   padding: '0.5em',
+  cursor: 'pointer',
+  lineHeight: 1,
 };
 
 export const warningButtonStyle = {

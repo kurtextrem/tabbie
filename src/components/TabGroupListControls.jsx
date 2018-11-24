@@ -1,28 +1,37 @@
-import React from 'react'
-import PropTypes from 'prop-types'
 import Button from './Button'
-import { inputStyle, inputErrorStyle } from '../styles/input'
+import PropTypes from 'prop-types'
+import React from 'react'
+import { inputErrorStyle, inputStyle } from '../styles/input'
 
 const formStyle = {
 	display: 'flex',
 	flexDirection: 'column',
+	marginTop: '0.25em',
+	// borderTop: '1px solid #ccc',
 }
 
 const formInputStyle = {
-	margin: '1em 0',
+	margin: '0.5em 0',
 }
 
 const formButtonStyle = {
-	marginTop: '1em',
+	marginBottom: '0.25em',
 }
 
 const formCheckboxStyle = {
-	marginTop: '1em',
+	// marginTop: '0.5em',
 }
 
-const ListControls = ({ onClickSetSaveSelected, onTabGroupNameChange, onSaveTabGroupClick, saveSelected, tabGroupError, tabGroupName }) => (
+const ListControls = ({
+	onClickSetSaveSelected,
+	onTabGroupNameChange,
+	onSaveTabGroupClick,
+	saveSelected,
+	tabGroupError,
+	tabGroupName,
+}) => (
 	<form style={formStyle}>
-		<label htmlFor={'input-tab-group-name'}>
+		<label htmlFor="input-tab-group-name">
 			<strong>New Tab Group Name</strong>
 		</label>
 		<input
@@ -30,7 +39,11 @@ const ListControls = ({ onClickSetSaveSelected, onTabGroupNameChange, onSaveTabG
 			onChange={onTabGroupNameChange}
 			placeholder={"Ex. Yesterday's Work"}
 			value={tabGroupName}
-			style={tabGroupError ? { ...inputErrorStyle, ...formInputStyle } : { ...inputStyle, ...formInputStyle }}
+			style={
+				tabGroupError
+					? { ...inputErrorStyle, ...formInputStyle }
+					: { ...inputStyle, ...formInputStyle }
+			}
 		/>
 		<span style={formButtonStyle}>
 			<Button
@@ -38,8 +51,9 @@ const ListControls = ({ onClickSetSaveSelected, onTabGroupNameChange, onSaveTabG
 					e.preventDefault()
 					onSaveTabGroupClick({ tabGroupName, saveSelected, close: false })
 				}}
-				type={'primary'}
-				fullWidth>
+				type="primary"
+				fullWidth
+			>
 				Save {saveSelected ? 'Selected' : 'All'} Tabs
 			</Button>
 		</span>
@@ -49,15 +63,16 @@ const ListControls = ({ onClickSetSaveSelected, onTabGroupNameChange, onSaveTabG
 					e.preventDefault()
 					onSaveTabGroupClick({ tabGroupName, saveSelected, close: true })
 				}}
-				hoverId={'tab-group-list-controls/save-and-close'}
-				fullWidth>
+				hoverId="tab-group-list-controls/save-and-close"
+				fullWidth
+			>
 				Save & Close {saveSelected ? 'Selected' : 'All'} Tabs
 			</Button>
 		</span>
-		<label style={formCheckboxStyle} htmlFor={'cb-save-selected-tabs'}>
+		<label style={formCheckboxStyle} htmlFor="cb-save-selected-tabs">
 			<input
-				type={'checkbox'}
-				id={'cb-save-selected-tabs'}
+				type="checkbox"
+				id="cb-save-selected-tabs"
 				checked={saveSelected}
 				onClick={() => onClickSetSaveSelected(!saveSelected)}
 				readOnly
