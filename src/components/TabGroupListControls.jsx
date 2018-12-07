@@ -29,10 +29,13 @@ const ListControls = ({
 	saveSelected,
 	tabGroupError,
 	tabGroupName,
+	addTo,
 }) => (
 	<form style={formStyle}>
 		<label htmlFor="input-tab-group-name">
-			<strong>New Tab Group Name</strong>
+			<strong>
+				{addTo !== -1 ? `Add Tabs to ${tabGroupName}` : 'New Tab Group Name'}
+			</strong>
 		</label>
 		<input
 			id="input-tab-group-name"
@@ -49,24 +52,35 @@ const ListControls = ({
 			<Button
 				onClick={e => {
 					e.preventDefault()
-					onSaveTabGroupClick({ tabGroupName, saveSelected, close: false })
+					onSaveTabGroupClick({
+						tabGroupName,
+						saveSelected,
+						close: false,
+						addTo,
+					})
 				}}
 				type="primary"
 				fullWidth
 			>
-				Save {saveSelected ? 'Selected' : 'All'} Tabs
+				{addTo !== -1 ? 'Add' : 'Save'} {saveSelected ? 'Selected' : 'All'} Tabs
 			</Button>
 		</span>
 		<span style={formButtonStyle}>
 			<Button
 				onClick={e => {
 					e.preventDefault()
-					onSaveTabGroupClick({ tabGroupName, saveSelected, close: true })
+					onSaveTabGroupClick({
+						tabGroupName,
+						saveSelected,
+						close: true,
+						addTo,
+					})
 				}}
 				hoverId="tab-group-list-controls/save-and-close"
 				fullWidth
 			>
-				Save & Close {saveSelected ? 'Selected' : 'All'} Tabs
+				{addTo !== -1 ? 'Add' : 'Save'} & Close{' '}
+				{saveSelected ? 'Selected' : 'All'} Tabs
 			</Button>
 		</span>
 		<label style={formCheckboxStyle} htmlFor="cb-save-selected-tabs">
@@ -77,7 +91,7 @@ const ListControls = ({
 				onClick={() => onClickSetSaveSelected(!saveSelected)}
 				readOnly
 			/>{' '}
-			Only Save Selected Tabs
+			Only {addTo !== -1 ? 'Add' : 'Save'} Selected Tabs
 		</label>
 	</form>
 )
@@ -89,6 +103,7 @@ ListControls.propTypes = {
 	saveSelected: PropTypes.bool.isRequired,
 	tabGroupError: PropTypes.bool,
 	tabGroupName: PropTypes.string,
+	addTo: PropTypes.number,
 }
 
 export default ListControls
