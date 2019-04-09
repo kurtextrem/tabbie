@@ -1,7 +1,7 @@
 const titleStyle = {
-  marginTop: 0,
-  marginBottom: '0.5em',
-  flex: 1,
-};
+	marginTop: 0,
+	marginBottom: 0,
+	flex: '1 1 auto',
+}
 
-export default titleStyle;
+export default titleStyle
