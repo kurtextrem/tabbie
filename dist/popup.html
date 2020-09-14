@@ -7,9 +7,50 @@
 			html,
 			body,
 			#container {
-				margin: 0;
-				height: 100%;
 				box-sizing: border-box;
+				height: 100%;
+				margin: 0;
+			}
+
+			/*=============================================
+								Mac OS Scrollbar
+			=============================================*/
+			::-webkit-scrollbar {
+				width: 9px;
+				background-color: rgba(0, 0, 0, 0);
+				border-radius: 100px;
+				contain: strict;
+				/*transition: background-color 1s linear;*/
+			}
+
+			::-webkit-scrollbar:horizontal {
+				height: 9px;
+			}
+
+			/* hover effect for both scrollbar area, and scrollbar 'thumb' */
+			::-webkit-scrollbar:hover,
+			::-webkit-scrollbar:focus {
+				background-color: rgba(0, 0, 0, 0.07);
+			}
+
+			/* The scrollbar 'thumb' ...that marque oval shape in a scrollbar */
+			::-webkit-scrollbar-thumb {
+				/*transition: background-color 1s linear;*/
+			}
+
+			::-webkit-scrollbar-thumb:vertical,
+			::-webkit-scrollbar-thumb:horizontal {
+				min-height: 30px;
+				background-color: #afafaf;
+				background-clip: padding-box;
+				border: 2px solid rgba(0, 0, 0, 0);
+				border-radius: 100px;
+			}
+
+			::-webkit-scrollbar-thumb:vertical:active,
+			::-webkit-scrollbar-thumb:horizontal:active {
+				background-color: #727272; /* Some darker color when you click it */
+				border-radius: 100px;
 			}
 		</style>
 		<link rel="preload" href="analytics.js" as="script" />
