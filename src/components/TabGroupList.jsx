@@ -1,14 +1,37 @@
-import React from 'react'
 import PropTypes from 'prop-types'
-import TabGroupListItem from '../containers/TabGroupListItem'
+import React from 'react'
 import TabGroupListEmpty from './TabGroupListEmpty'
+import TabGroupListItem from '../containers/TabGroupListItem'
 import { listStyle } from '../styles/list'
 
-const TabGroupList = ({ tabGroups }) => (
-	<ul style={listStyle}>
-		{tabGroups.length ? tabGroups.map((tabGroup, i) => <TabGroupListItem {...tabGroup} tabGroupKey={i} key={i} />) : <TabGroupListEmpty />}
-	</ul>
-)
+class TabGroupList extends React.Component {
+	ref = null
+
+	setRef = ref => {
+		this.ref = ref
+	}
+
+	componentDidMount() {
+		if (this.ref !== null) {
+			const children = this.ref.children
+			children[children.length - 1].scrollIntoView()
+		}
+	}
+
+	render() {
+		const tabGroups = this.props.tabGroups
+
+		return (
+			<ul style={listStyle} ref={this.setRef}>
+				{tabGroups.length ? (
+					tabGroups.map((tabGroup, i) => <TabGroupListItem {...tabGroup} tabGroupKey={i} key={i} />)
+				) : (
+					<TabGroupListEmpty />
+				)}
+			</ul>
+		)
+	}
+}
 
 TabGroupList.propTypes = {
 	tabGroups: PropTypes.arrayOf(
