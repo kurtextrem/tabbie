@@ -16,7 +16,7 @@ class TabGroupList extends React.Component {
 	}
 
 	componentDidUpdate() {
-		if (this.ref !== null && this.ref.parentElement.scrollTop === 0) {
+		if (this.ref !== null && this.ref.parentElement.scrollTop < 200) {
 			const children = this.ref.children
 			children[children.length - 1].scrollIntoView()
 		}
